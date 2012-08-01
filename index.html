@@ -4,20 +4,41 @@
         <meta charset="utf-8">
         <title>my.rhoeas.tk</title>
         <meta name="author" content="Kamila Součková">
-        <link rel="stylesheet" href="assets/all.css">
+        <link rel="stylesheet" href="assets/normalize.css">
+        <link rel="stylesheet" href="assets/home.css">
     </head>
     <body>
 
+        <header id="main-header"><span class="hl">my</span>.rhoeas.tk</header>
+
         <nav id="main-nav">
             <ul>
-                <li><a href="t">
-                </a></li>
+                <li><a href="t" class="up"><span class="hk">T</span>Transmission</a></li>
+                <li><a href="m" class="down"><span class="hk">M</span>Music Library</a></li>
+                <li><a href="b" class="down"><span class="hk">B</span>E-Book Library</a></span></li>
+                <li><a href="s" class="down"><span class="hk">S</span>Server Status</a></span></li>
             </ul>
         </nav>
 
         <section id="serverstatus">
-            some text
         </section>
+
+        <footer id="main-footer">
+            uptime --, load --
+        </footer>
+
+<script type="text/javascript">
+// setup hotkeys for navigation
+var keys = {};
+var targets = document.getElementsByClassName('hk');
+for (var i = 0; i < targets.length; i++) {
+    keys[targets[i].innerText.toLowerCase().charCodeAt(0)] = targets[i];
+}
+document.addEventListener('keypress', function(e) {
+    var c = e.charCode;
+    if (keys[c]) keys[c].click();
+});
+</script>
 
     </body>
 </html>
