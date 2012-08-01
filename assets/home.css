@@ -6,20 +6,28 @@ body {
     font-weight: 400;
     text-shadow: -1px -1px 0 #000;
     text-rendering: optimizeLegibility;
+    z-index: 0;
 }
 
 .hl { color: #dc322f; }
 
 #main-header {
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
     padding: 8px 0 10px 0;
     text-align: center;
     font-size: 18px;
     color: #839496;
     font-weight: bold;
+    background: #002b36;
     border-bottom: 1px solid #073642;
 }
 #main-footer {
-    position: absolute;
+    position: fixed;
+    z-index: 1;
     bottom: 0;
     left: 0;
     width: 100%;
@@ -28,13 +36,15 @@ body {
     font-size: 12px;
     color: #586e75;
     text-shadow: -1px -1px 0 #111;
+    background: #002b36;
     border-top: 1px solid #073642;
 }
 
 #main-nav {
     width: 70%;
     max-width: 600px;
-    margin: 20px auto;
+    margin: 0 auto;
+    padding: 50px 0;
 }
 #main-nav ul {
     list-style: none;
