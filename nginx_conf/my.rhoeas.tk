@@ -1,0 +1,32 @@
+server {
+    listen       80;
+    server_name  my.rhoeas.tk;
+    rewrite      ^(.*) https://$server_name$1 permanent;
+}
+server {
+    listen       443;
+    server_name  my.rhoeas.tk;
+
+    access_log   /var/log/nginx/my.rhoeas.tk/access.log;
+    error_log    /var/log/nginx/my.rhoeas.tk/error.log  info;
+
+    root         /home/kamila/www/my.rhoeas.tk;
+    index        index.html index.htm;
+
+    ssl  on;
+    ssl_certificate  /etc/ssl/certs/my.rhoeas.tk.crt;
+    ssl_certificate_key  /etc/ssl/private/server.key;
+
+    auth_basic  'my stuff';
+    auth_basic_user_file  /home/kamila/www/.htpasswds/my.rhoeas.tk;
+
+    # -------------------------------------------------------------------------
+
+    location /t {
+        proxy_set_header  X-Real-IP  $remote_addr;
+        proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;
+        proxy_set_header  Host  $http_host;
+        proxy_redirect    off;
+        proxy_pass        http://127.0.0.1:9091/t;
+    }
+}

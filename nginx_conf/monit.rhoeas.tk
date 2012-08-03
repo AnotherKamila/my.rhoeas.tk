@@ -1,0 +1,28 @@
+server {
+    listen       80;
+    server_name  monit.rhoeas.tk;
+    rewrite      ^(.*) https://$server_name$1 permanent;
+}
+server {
+    listen       443;
+    server_name  monit.rhoeas.tk;
+
+    access_log   /var/log/nginx/monit.rhoeas.tk/access.log;
+    error_log    /var/log/nginx/monit.rhoeas.tk/error.log  info;
+
+    ssl  on;
+    ssl_certificate  /etc/ssl/certs/monit.rhoeas.tk.crt;
+    ssl_certificate_key  /etc/ssl/private/server.key;
+
+    auth_basic  'Monit Web Interface';
+    auth_basic_user_file  /home/kamila/www/.htpasswds/my.rhoeas.tk;
+
+    # -------------------------------------------------------------------------
+
+    location / {
+        proxy_set_header  X-Real-IP  $remote_addr;
+        proxy_set_header  X-Forwarded-For  $proxy_add_x_forwarded_for;
+        proxy_set_header  Host  $http_host;
+        proxy_pass        http://127.0.0.1:2812;
+    }
+}
